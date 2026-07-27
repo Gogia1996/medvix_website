@@ -1,0 +1,62 @@
+<header
+  class="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur-md"
+  data-controller="mobile-menu">
+  <div class="container-custom flex h-16 items-center justify-between md:h-24">
+    <!-- Logo -->
+    <a href="#hero" class="flex items-center">
+      <%= image_tag "logo.jpeg",
+          alt: "Medvix Pharmaceuticals",
+          class: "h-10 w-auto md:h-16" %>
+    </a>
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:block">
+      <ul class="flex items-center gap-8 text-[15px] font-medium text-slate-700">
+        <li><a href="#hero" class="hover:text-blue-700">Home</a></li>
+        <li><a href="#about" class="hover:text-blue-700">About</a></li>
+        <li><a href="#products" class="hover:text-blue-700">Products</a></li>
+        <li><a href="#segments" class="hover:text-blue-700">Segments</a></li>
+        <li><a href="#contact" class="hover:text-blue-700">Contact</a></li>
+      </ul>
+    </nav>
+    <!-- Desktop CTA -->
+    <a
+      href="#contact"
+      class="hidden rounded-xl bg-[#0A3A8D] px-6 py-3 text-sm font-semibold text-white hover:bg-[#082f73] md:inline-flex">
+      Get in Touch
+    </a>
+    <!-- Mobile Menu Button -->
+    <button
+      type="button"
+      data-action="click->mobile-menu#toggle"
+      class="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 md:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke-width="2"
+           stroke="currentColor"
+           class="h-6 w-6">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+      </svg>
+    </button>
+  </div>
+  <!-- Mobile Menu -->
+  <div
+    data-mobile-menu-target="menu"
+    class="hidden border-t border-slate-200 bg-white md:hidden">
+    <nav class="flex flex-col p-4">
+      <a href="#hero" class="py-3">Home</a>
+      <a href="#about" class="py-3">About</a>
+      <a href="#products" class="py-3">Products</a>
+      <a href="#segments" class="py-3">Segments</a>
+      <a href="#contact" class="py-3">Contact</a>
+      <a
+        href="#contact"
+        class="mt-4 rounded-lg bg-[#0A3A8D] py-3 text-center text-white">
+        Get in Touch
+      </a>
+    </nav>
+  </div>
+</header>
