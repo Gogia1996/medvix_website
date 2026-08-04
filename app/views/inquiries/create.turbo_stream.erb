@@ -1,0 +1,14 @@
+<%= turbo_stream.prepend "flash", partial: "shared/flash" %>
+
+<%= turbo_stream.replace "inquiry_form" do %>
+  <%= render "inquiries/form",
+             inquiry: @inquiry.persisted? ? Inquiry.new : @inquiry %>
+<% end %>
+
+<% if @inquiry.persisted? %>
+  <%= turbo_stream.after "flash" do %>
+    <script>
+      window.dispatchEvent(new CustomEvent("close-modal"))
+    </script>
+  <% end %>
+<% end %>

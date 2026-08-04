@@ -1,0 +1,27 @@
+<% flash.each do |type, message| %>
+  <div
+    data-controller="flash"
+    class="fixed top-24 right-6 z-[9999] w-[380px] max-w-[calc(100%-2rem)]
+           rounded-2xl border backdrop-blur-xl shadow-xl
+           px-5 py-4 flex items-start justify-between gap-4
+           transition-all duration-500
+           <%= type == "notice" ? "border-green-200 bg-green-100/80 text-green-900" : "border-red-200 bg-red-100/80 text-red-900" %>">
+
+    <div>
+      <p class="font-semibold">
+        <%= type == "notice" ? "Success" : "Oops!" %>
+      </p>
+
+      <p class="mt-1 text-sm">
+        <%= message %>
+      </p>
+    </div>
+
+    <button
+      type="button"
+      data-action="click->flash#close"
+      class="text-xl opacity-60 hover:opacity-100">
+      &times;
+    </button>
+  </div>
+<% end %>
