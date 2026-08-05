@@ -1,0 +1,254 @@
+<div data-controller="modal" class="bg-slate-50">
+
+  <!-- Breadcrumb -->
+  <section class="border-b border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-7xl items-center gap-2 px-6 py-4 text-sm text-slate-500">
+
+      <%= link_to "Home", root_path, class: "hover:text-blue-700" %>
+
+      <span>›</span>
+
+      <%= link_to "Products",
+            root_path(anchor: "products"),
+            class: "hover:text-blue-700" %>
+
+      <span>›</span>
+
+      <span class="font-medium text-slate-700">
+        <%= @product.name %>
+      </span>
+
+    </div>
+  </section>
+
+  <!-- Hero -->
+  <section class="py-16">
+    <div class="mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 lg:grid-cols-2">
+
+      <!-- Product Image -->
+      <div class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
+
+        <% if @product.image.attached? %>
+
+          <%= image_tag @product.image,
+                class: "w-full transition duration-500 hover:scale-105" %>
+
+        <% else %>
+
+          <div class="flex h-[520px] items-center justify-center bg-slate-100">
+
+            <span class="text-slate-400">
+              Product Image
+            </span>
+
+          </div>
+
+        <% end %>
+
+      </div>
+
+      <!-- Product Details -->
+      <div class="flex flex-col justify-center">
+
+        <% if @product.segment.present? %>
+
+          <span class="inline-flex w-fit rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-700">
+            <%= @product.segment %>
+          </span>
+
+        <% end %>
+
+        <h1 class="mt-6 text-5xl font-extrabold tracking-tight text-slate-900">
+          <%= @product.name %>
+        </h1>
+
+        <div class="mt-5 h-1 w-24 rounded-full bg-blue-700"></div>
+
+        <% details = [@product.strength, @product.dosage_form].reject(&:blank?).join(" ") %>
+
+        <% if details.present? %>
+
+          <p class="mt-6 text-xl font-semibold text-slate-600">
+            <%= details %>
+          </p>
+
+        <% end %>
+
+        <% if @product.short_description.present? %>
+
+          <p class="mt-8 text-lg leading-8 text-slate-600">
+            <%= @product.short_description %>
+          </p>
+
+        <% end %>
+
+        <!-- Trust Card -->
+
+        <div class="mt-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+
+          <h3 class="text-lg font-semibold text-slate-900">
+            Why choose this product?
+          </h3>
+
+          <div class="mt-5 space-y-4">
+
+            <div class="flex items-center gap-4">
+
+              <div class="flex h-9 w-9 items-center justify-center rounded-full bg-green-100 font-bold text-green-600">
+                ✓
+              </div>
+
+              <span class="text-slate-700">
+                Manufactured with stringent quality standards
+              </span>
+
+            </div>
+
+            <div class="flex items-center gap-4">
+
+              <div class="flex h-9 w-9 items-center justify-center rounded-full bg-green-100 font-bold text-green-600">
+                ✓
+              </div>
+
+              <span class="text-slate-700">
+                Trusted pharmaceutical formulation
+              </span>
+
+            </div>
+
+            <div class="flex items-center gap-4">
+
+              <div class="flex h-9 w-9 items-center justify-center rounded-full bg-green-100 font-bold text-green-600">
+                ✓
+              </div>
+
+              <span class="text-slate-700">
+                Developed for better patient care
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- CTA -->
+
+        <button
+          type="button"
+          data-action="click->modal#open"
+          class="mt-10 inline-flex w-fit items-center rounded-xl bg-blue-700 px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-blue-800 hover:shadow-xl">
+
+          Send Inquiry
+
+          <span class="ml-2 transition-transform duration-300 group-hover:translate-x-1">
+            →
+          </span>
+
+        </button>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Product Information -->
+
+  <section class="pb-20">
+
+    <div class="mx-auto max-w-7xl space-y-8 px-6">
+
+      <% if @product.description.present? %>
+
+        <div class="rounded-3xl border-l-4 border-blue-700 bg-white p-8 shadow-sm">
+
+          <h2 class="text-2xl font-bold text-slate-900">
+            Description
+          </h2>
+
+          <div class="mt-5 leading-8 text-slate-600">
+            <%= simple_format(@product.description) %>
+          </div>
+
+        </div>
+
+      <% end %>
+
+      <% if @product.composition.present? %>
+
+        <div class="rounded-3xl border-l-4 border-blue-700 bg-white p-8 shadow-sm">
+
+          <h2 class="text-2xl font-bold text-slate-900">
+            Composition
+          </h2>
+
+          <div class="mt-5 leading-8 text-slate-600">
+            <%= simple_format(@product.composition) %>
+          </div>
+
+        </div>
+
+      <% end %>
+
+      <% if @product.indications.present? %>
+
+        <div class="rounded-3xl border-l-4 border-blue-700 bg-white p-8 shadow-sm">
+
+          <h2 class="text-2xl font-bold text-slate-900">
+            Indications
+          </h2>
+
+          <div class="mt-5 leading-8 text-slate-600">
+            <%= simple_format(@product.indications) %>
+          </div>
+
+        </div>
+
+      <% end %>
+
+      <% if @product.storage.present? || @product.packaging.present? %>
+
+        <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+
+          <% if @product.storage.present? %>
+
+            <div class="rounded-3xl border-l-4 border-blue-700 bg-white p-8 shadow-sm">
+
+              <h2 class="text-2xl font-bold text-slate-900">
+                Storage
+              </h2>
+
+              <p class="mt-5 leading-8 text-slate-600">
+                <%= @product.storage %>
+              </p>
+
+            </div>
+
+          <% end %>
+
+          <% if @product.packaging.present? %>
+
+            <div class="rounded-3xl border-l-4 border-blue-700 bg-white p-8 shadow-sm">
+
+              <h2 class="text-2xl font-bold text-slate-900">
+                Packaging
+              </h2>
+
+              <p class="mt-5 leading-8 text-slate-600">
+                <%= @product.packaging %>
+              </p>
+
+            </div>
+
+          <% end %>
+
+        </div>
+
+      <% end %>
+
+    </div>
+
+  </section>
+
+  <%= render "shared/inquiry_modal" %>
+</div>

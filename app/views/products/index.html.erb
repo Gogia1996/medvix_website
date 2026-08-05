@@ -1,0 +1,198 @@
+<div class="bg-slate-50">
+
+  <!-- Hero -->
+  <section class="border-b border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-6 py-20 text-center">
+
+      <span class="inline-flex rounded-full bg-blue-100 px-5 py-2 text-sm font-semibold text-blue-700">
+        Medvix Pharmaceuticals
+      </span>
+
+      <h1 class="mt-6 text-5xl font-extrabold tracking-tight text-slate-900">
+        Our Products
+      </h1>
+
+      <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-600">
+        Discover our growing portfolio of high-quality pharmaceutical formulations
+        developed with innovation, safety and patient care at the core.
+      </p>
+
+      <!-- Search -->
+
+      <div class="mx-auto mt-12 max-w-3xl">
+
+        <div class="relative">
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor">
+
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-5.2-5.2m2.2-5.3a7 7 0 11-14 0 7 7 0 0114 0z"/>
+
+          </svg>
+
+          <input
+            type="text"
+            placeholder="Search products..."
+            class="w-full rounded-2xl border border-slate-300 bg-white py-4 pl-14 pr-6 shadow-sm outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100">
+
+        </div>
+
+      </div>
+
+      <p class="mt-8 text-sm text-slate-500">
+        Showing
+        <span class="font-semibold text-slate-800">
+          <%= @products.count %>
+        </span>
+        <%= "Product".pluralize(@products.count) %>
+      </p>
+
+    </div>
+  </section>
+
+  <!-- Products -->
+
+  <section class="py-16">
+
+    <div class="mx-auto max-w-7xl px-6">
+
+      <% if @products.any? %>
+
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+
+          <% @products.each do |product| %>
+
+            <div class="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+
+              <!-- Image -->
+
+              <div class="aspect-[4/3] overflow-hidden bg-slate-100">
+
+                <% if product.image.attached? %>
+
+                  <%= image_tag product.image,
+                        class: "h-full w-full object-cover transition duration-500 group-hover:scale-105" %>
+
+                <% else %>
+
+                  <div class="flex h-full items-center justify-center text-slate-400">
+                    No Image
+                  </div>
+
+                <% end %>
+
+              </div>
+
+              <!-- Content -->
+
+              <div class="p-6">
+
+                <% if product.segment.present? %>
+
+                  <span class="inline-flex rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-700">
+                    <%= product.segment %>
+                  </span>
+
+                <% end %>
+
+                <h2 class="mt-4 text-3xl font-bold text-slate-900">
+                  <%= product.name %>
+                </h2>
+
+                <% details = [product.strength, product.dosage_form].reject(&:blank?).join(" • ") %>
+
+                <% if details.present? %>
+
+                  <p class="mt-2 text-base font-medium text-slate-500">
+                    <%= details %>
+                  </p>
+
+                <% end %>
+
+                <% if product.short_description.present? %>
+
+                  <p class="mt-5 line-clamp-3 leading-7 text-slate-600">
+                    <%= product.short_description %>
+                  </p>
+
+                <% end %>
+
+                <%= link_to product_path(product.slug),
+                      class: "mt-8 inline-flex items-center rounded-xl bg-blue-700 px-6 py-3 font-semibold text-white transition hover:bg-blue-800" do %>
+
+                  View Product
+
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor">
+
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"/>
+
+                  </svg>
+
+                <% end %>
+
+              </div>
+
+            </div>
+
+          <% end %>
+
+        </div>
+
+      <% else %>
+
+        <div class="rounded-3xl bg-white py-24 text-center shadow-sm">
+
+          <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-blue-100">
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-10 w-10 text-blue-700"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor">
+
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20 13V7a2 2 0 00-2-2h-3V3H9v2H6a2 2 0 00-2 2v6m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0H4"/>
+
+            </svg>
+
+          </div>
+
+          <h2 class="mt-8 text-3xl font-bold text-slate-900">
+            No Products Available
+          </h2>
+
+          <p class="mx-auto mt-4 max-w-lg text-slate-600">
+            Our pharmaceutical portfolio is expanding.
+            Please check back soon for new products.
+          </p>
+
+        </div>
+
+      <% end %>
+
+    </div>
+
+  </section>
+
+</div>
