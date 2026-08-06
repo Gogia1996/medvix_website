@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     root "dashboard#index"
 
     resources :products
-    resources :inquiries, only: [:index, :show, :destroy]
+    resources :inquiries, only: [:index, :show, :destroy] do
+      patch :update_status, on: :member
+    end
   end
 end
