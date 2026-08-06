@@ -1,0 +1,126 @@
+<div>
+
+  <div class="mb-10">
+
+    <h1 class="text-5xl font-extrabold tracking-tight text-slate-900">
+      Dashboard Overview
+    </h1>
+
+    <p class="mt-3 text-lg text-slate-500">
+      Manage products and customer inquiries from one place.
+    </p>
+
+  </div>
+
+  <div class="grid gap-8 md:grid-cols-3">
+
+    <!-- Total Products -->
+    <div class="rounded-3xl border-t-4 border-blue-600 bg-white p-8 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+
+      <div class="flex items-center justify-between">
+
+        <div>
+
+          <p class="text-sm font-medium uppercase tracking-wide text-slate-500">
+            Total Products
+          </p>
+
+          <h2 class="mt-4 text-5xl font-bold text-blue-700">
+            <%= Product.count %>
+          </h2>
+
+        </div>
+
+        <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-100">
+
+          <svg xmlns="http://www.w3.org/2000/svg"
+               fill="none"
+               viewBox="0 0 24 24"
+               stroke-width="1.8"
+               stroke="currentColor"
+               class="h-8 w-8 text-blue-700">
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M20.25 7.5L12 3 3.75 7.5M20.25 7.5V16.5L12 21M20.25 7.5L12 12M12 21L3.75 16.5V7.5M12 21V12M3.75 7.5L12 12"/>
+          </svg>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Featured Products -->
+    <div class="rounded-3xl border-t-4 border-green-600 bg-white p-8 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+
+      <div class="flex items-center justify-between">
+
+        <div>
+
+          <p class="text-sm font-medium uppercase tracking-wide text-slate-500">
+            Featured Products
+          </p>
+
+          <h2 class="mt-4 text-5xl font-bold text-green-600">
+            <%= Product.where(featured: true).count %>
+          </h2>
+
+        </div>
+
+        <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-green-100">
+
+          <svg xmlns="http://www.w3.org/2000/svg"
+               fill="currentColor"
+               viewBox="0 0 20 20"
+               class="h-8 w-8 text-green-600">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.719c-.783-.57-.38-1.81.588-1.81H7.03a1 1 0 00.95-.69l1.07-3.292z"/>
+          </svg>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Total Inquiries -->
+    <div class="rounded-3xl border-t-4 border-cyan-600 bg-white p-8 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+
+      <div class="flex items-center justify-between">
+
+        <div>
+
+          <p class="text-sm font-medium uppercase tracking-wide text-slate-500">
+            Total Inquiries
+          </p>
+
+          <h2 class="mt-4 text-5xl font-bold text-cyan-600">
+            <%= Inquiry.count %>
+          </h2>
+
+        </div>
+
+        <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-cyan-100">
+
+          <svg xmlns="http://www.w3.org/2000/svg"
+               fill="none"
+               viewBox="0 0 24 24"
+               stroke-width="1.8"
+               stroke="currentColor"
+               class="h-8 w-8 text-cyan-600">
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21.75 6.75v10.5A2.25 2.25 0 0119.5 19.5h-15A2.25 2.25 0 012.25 17.25V6.75A2.25 2.25 0 014.5 4.5h15A2.25 2.25 0 0121.75 6.75z"/>
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M2.25 7.5L12 13.5 21.75 7.5"/>
+          </svg>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

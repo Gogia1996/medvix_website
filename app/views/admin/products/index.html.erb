@@ -1,0 +1,174 @@
+<div>
+
+  <!-- Header -->
+  <div class="flex items-center justify-between">
+
+    <div>
+
+      <h1 class="text-4xl font-bold text-slate-900">
+        Products
+      </h1>
+
+      <p class="mt-2 text-slate-500">
+        Manage your pharmaceutical product portfolio.
+      </p>
+
+    </div>
+
+    <%= link_to new_admin_product_path,
+          class: "inline-flex items-center rounded-xl bg-[#0A3A8D] px-6 py-3 font-semibold text-white transition hover:bg-[#08306f]" do %>
+
+      <svg xmlns="http://www.w3.org/2000/svg"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke-width="2"
+           stroke="currentColor"
+           class="mr-2 h-5 w-5">
+
+        <path stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 4.5v15m7.5-7.5h-15"/>
+
+      </svg>
+
+      Add Product
+
+    <% end %>
+
+  </div>
+
+  <!-- Table -->
+  <div class="mt-10 overflow-hidden rounded-3xl bg-white shadow ring-1 ring-slate-200">
+
+    <table class="min-w-full">
+
+      <thead class="bg-slate-50">
+
+        <tr>
+
+          <th class="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+            Image
+          </th>
+
+          <th class="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+            Product
+          </th>
+
+          <th class="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+            Strength
+          </th>
+
+          <th class="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+            Dosage Form
+          </th>
+
+          <th class="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+            Featured
+          </th>
+
+          <th class="px-6 py-4 text-right text-sm font-semibold text-slate-700">
+            Actions
+          </th>
+
+        </tr>
+
+      </thead>
+
+      <tbody class="divide-y divide-slate-100">
+
+        <% @products.each do |product| %>
+
+          <tr class="hover:bg-slate-50">
+
+            <!-- Image -->
+            <td class="px-6 py-5">
+
+              <% if product.image.attached? %>
+
+                <%= image_tag product.image,
+                      class: "h-16 w-16 rounded-xl object-cover ring-1 ring-slate-200" %>
+
+              <% else %>
+
+                <div class="flex h-16 w-16 items-center justify-center rounded-xl bg-slate-100 text-xs text-slate-400">
+                  No Image
+                </div>
+
+              <% end %>
+
+            </td>
+
+            <!-- Name -->
+            <td class="px-6 py-5">
+
+              <p class="font-semibold text-slate-900">
+                <%= product.name %>
+              </p>
+
+              <p class="text-sm text-slate-500">
+                <%= product.slug %>
+              </p>
+
+            </td>
+
+            <!-- Strength -->
+            <td class="px-6 py-5 text-slate-600">
+              <%= product.strength.presence || "-" %>
+            </td>
+
+            <!-- Dosage -->
+            <td class="px-6 py-5 text-slate-600">
+              <%= product.dosage_form.presence || "-" %>
+            </td>
+
+            <!-- Featured -->
+            <td class="px-6 py-5">
+
+              <% if product.featured? %>
+
+                <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
+                  Yes
+                </span>
+
+              <% else %>
+
+                <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-500">
+                  No
+                </span>
+
+              <% end %>
+
+            </td>
+
+            <!-- Actions -->
+            <td class="px-6 py-5">
+
+              <div class="flex justify-end gap-3">
+
+                <%= link_to "Edit",
+                      edit_admin_product_path(product),
+                      class: "rounded-lg bg-blue-100 px-4 py-2 text-sm font-medium text-blue-700 hover:bg-blue-200" %>
+
+                <%= button_to "Delete",
+                      admin_product_path(product),
+                      method: :delete,
+                      data: {
+                        turbo_confirm: "Are you sure you want to delete this product?"
+                      },
+                      class: "rounded-lg bg-red-100 px-4 py-2 text-sm font-medium text-red-700 hover:bg-red-200" %>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        <% end %>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Medvix Admin</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-slate-50">
+
+    <div class="flex min-h-screen">
+
+      <%= render "admin/shared/sidebar" %>
+
+      <div class="flex flex-1 flex-col">
+
+        <%= render "admin/shared/header" %>
+
+        <% if notice.present? %>
+          <div class="px-10 pt-6">
+            <div class="rounded-xl border border-green-200 bg-green-50 px-5 py-4 text-green-700">
+              <%= notice %>
+            </div>
+          </div>
+        <% end %>
+
+        <% if alert.present? %>
+          <div class="px-10 pt-6">
+            <div class="rounded-xl border border-red-200 bg-red-50 px-5 py-4 text-red-700">
+              <%= alert %>
+            </div>
+          </div>
+        <% end %>
+
+        <main class="flex-1 p-8 lg:p-10">
+          <%= yield %>
+        </main>
+
+      </div>
+
+    </div>
+
+  </body>
+</html>
